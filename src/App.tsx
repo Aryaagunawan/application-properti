@@ -36,7 +36,7 @@ interface ToastState {
 // --- MOCK DATA ---
 const HERO_SLIDES = [
   "https://images.unsplash.com/photo-1494526585095-c41746248156?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80",
-  "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80",
+  "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80",
   "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80",
 ];
 
@@ -900,7 +900,7 @@ export default function App() {
                   <div className="w-12 h-12 rounded-2xl bg-slate-900 border border-slate-800 flex items-center justify-center flex-shrink-0 text-orange-500">
                     <Phone className="w-5 h-5" />
                   </div>
-                  <span className="font-light text-slate-400">+62 813 2345 6223</span>
+                  <span className="font-light text-slate-400">+62 816 2345 6253</span>
                 </li>
                 <li className="flex items-center gap-5">
                   <div className="w-12 h-12 rounded-2xl bg-slate-900 border border-slate-800 flex items-center justify-center flex-shrink-0 text-orange-500">
