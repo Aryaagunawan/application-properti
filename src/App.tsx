@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import {
   Home, MapPin, Search, Menu, X, ShieldCheck, Gem, Headset,
   Facebook, Instagram, Twitter, Mail, Phone, BedDouble, Bath,
@@ -160,103 +160,13 @@ const PROPERTIES: Property[] = [
       "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
     ],
     desc: "Elegansi tata ruang yang dirancang untuk mendukung interaksi hangat keluarga besar. Setiap sudutnya dirancang dengan presisi, memancarkan wibawa dan rasa tenang."
-  },
-  {
-    id: 7, title: "Teras Antasari Suite", location: "Bandar Lampung", type: "Apartemen", price: "Rp 650.000.000",
-    beds: 1, baths: 1, area: 45, image: "https://images.unsplash.com/photo-1502672260266-1c1e52508241?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    images: [
-      "https://images.unsplash.com/photo-1502672260266-1c1e52508241?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-    ],
-    desc: "Menyuguhkan gaya hidup praktis namun berkelas. Cocok untuk profesional muda yang menghargai efisiensi waktu, dengan bonus pemandangan kota dari balkon."
-  },
-  {
-    id: 8, title: "Dago Serenity Home", location: "Bandung", type: "Rumah Komersil", price: "Rp 2.800.000.000",
-    beds: 3, baths: 2, area: 200, image: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    images: [
-      "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-    ],
-    desc: "Dibungkus dalam sejuknya kabut Dago, rumah ini didesain memaksimalkan sirkulasi udara pegunungan. Halaman belakangnya mengundang Anda untuk sekadar duduk santai."
-  },
-  {
-    id: 9, title: "Amerta Villa Ubud", location: "Bali", type: "Villa", price: "Rp 4.800.000.000",
-    beds: 3, baths: 3, area: 300, image: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    images: [
-      "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-    ],
-    desc: "Menyerap damainya nuansa persawahan Ubud ke dalam ruang keluarga Anda. Penggunaan elemen kayu daur ulang batu alam membumikan jiwa penghuninya."
-  },
-  {
-    id: 10, title: "Nirwana Jatiagung", location: "Bandar Lampung", type: "Rumah Subsidi", price: "Rp 162.000.000",
-    beds: 2, baths: 1, area: 65, image: "https://images.unsplash.com/photo-1513694203232-719a280e022f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    images: [
-      "https://images.unsplash.com/photo-1513694203232-719a280e022f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      "https://images.unsplash.com/photo-1484154218962-a197022b5858?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      "https://images.unsplash.com/photo-1502672023488-70e25813eb80?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-    ],
-    desc: "Sebuah pembuktian bahwa rumah bersubsidi dapat dikelola dengan lingkungan yang rapi, jalan lebar, dan pengolahan air bersih yang baik. Titik mula yang tepat untuk keluarga."
-  },
-  {
-    id: 11, title: "Kemang Cendana", location: "Jakarta", type: "Rumah Komersil", price: "Rp 12.000.000.000",
-    beds: 5, baths: 5, area: 600, image: "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    images: [
-      "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-    ],
-    desc: "Kemewahan yang tak lekang oleh waktu. Menawarkan privasi total di hiruk-pikuk Kemang, dengan master bedroom suite yang dirancang setara dengan resort."
-  },
-  {
-    id: 12, title: "Thamrin Executive Sky", location: "Jakarta", type: "Apartemen", price: "Rp 4.500.000.000",
-    beds: 3, baths: 2, area: 150, image: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    images: [
-      "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      "https://images.unsplash.com/photo-1502672260266-1c1e52508241?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-    ],
-    desc: "Genggam jantung kota dari ruang tamu Anda. Material lantai marmer dan smart home integration menyeluruh menciptakan pengalaman tinggal tak tertandingi."
-  },
-  {
-    id: 13, title: "Soreang Indah Lestari", location: "Bandung", type: "Rumah Subsidi", price: "Rp 162.000.000",
-    beds: 2, baths: 1, area: 60, image: "https://images.unsplash.com/photo-1524813686514-a57563d77965?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    images: [
-      "https://images.unsplash.com/photo-1524813686514-a57563d77965?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      "https://images.unsplash.com/photo-1484154218962-a197022b5858?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      "https://images.unsplash.com/photo-1502672023488-70e25813eb80?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-    ],
-    desc: "Kawasan hunian subsidi dengan view pegunungan Bandung Selatan. Udara segar dan lingkungan yang berkembang pesat sangat cocok untuk investasi masa depan keluarga Anda."
-  },
-  {
-    id: 14, title: "Pine Breeze Lembang", location: "Bandung", type: "Villa", price: "Rp 3.500.000.000",
-    beds: 3, baths: 3, area: 250, image: "https://images.unsplash.com/photo-1510627498534-cf7e9002facc?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    images: [
-      "https://images.unsplash.com/photo-1510627498534-cf7e9002facc?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      "https://images.unsplash.com/photo-1449844908441-8829872d2607?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      "https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-    ],
-    desc: "Menyatu dengan alam Lembang yang dingin. Dikelilingi hutan pinus, villa ini menawarkan perapian di ruang keluarga dan jendela kaca besar untuk pemandangan maksimal."
-  },
-  {
-    id: 15, title: "Sidoarjo Mandiri Sejahtera", location: "Surabaya", type: "Rumah Subsidi", price: "Rp 162.000.000",
-    beds: 2, baths: 1, area: 60, image: "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    images: [
-      "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      "https://images.unsplash.com/photo-1524813686514-a57563d77965?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      "https://images.unsplash.com/photo-1513694203232-719a280e022f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-    ],
-    desc: "Lokasi strategis di perbatasan Sidoarjo-Surabaya. Perumahan bersubsidi dengan desain modern minimalis, akses transportasi mudah, dan dekat dengan fasilitas umum."
   }
 ];
 
 // --- COMPONENTS ---
 const FaqAccordionItem = ({ faq, isOpen, onClick }: { faq: any, isOpen: boolean, onClick: () => void }) => {
   return (
-    <div className="border-b border-gray-100 py-6">
+    <div className="border-b border-gray-100 py-6 reveal">
       <button onClick={onClick} className="flex w-full justify-between items-center text-left focus:outline-none group">
         <span className={`font-medium text-lg transition-colors duration-300 ${isOpen ? 'text-orange-500' : 'text-slate-800 group-hover:text-orange-500'}`}>
           {faq.question}
@@ -265,7 +175,7 @@ const FaqAccordionItem = ({ faq, isOpen, onClick }: { faq: any, isOpen: boolean,
           {isOpen ? <ChevronUp className="w-5 h-5" /> : <ChevronDown className="w-5 h-5" />}
         </div>
       </button>
-      <div className={`overflow-hidden transition-all duration-500 ease-in-out ${isOpen ? 'max-h-96 opacity-100 mt-5' : 'max-h-0 opacity-0'}`}>
+      <div className={`overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${isOpen ? 'max-h-96 opacity-100 mt-5' : 'max-h-0 opacity-0'}`}>
         <p className="text-slate-500 font-light leading-relaxed pr-12 text-base">{faq.answer}</p>
       </div>
     </div>
@@ -287,12 +197,37 @@ export default function App() {
   const [filters, setFilters] = useState<FilterState>({ location: '', type: '' });
   const [toast, setToast] = useState<ToastState>({ show: false, message: '', bgClass: 'bg-green-500' });
 
+  // Intersection Observer for Scroll Reveal Animations (The Magic Sauce)
+  useEffect(() => {
+    const observerOptions = {
+      root: null,
+      rootMargin: '0px 0px -100px 0px', // Trigger slightly before it hits the bottom
+      threshold: 0.1, // Trigger when 10% is visible
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+          // Optional: Stop observing once revealed so it doesn't animate out when scrolling up
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    // Re-query elements whenever visibleCount changes (for Load More)
+    const elements = document.querySelectorAll('.reveal');
+    elements.forEach((el) => observer.observe(el));
+
+    return () => observer.disconnect();
+  }, [visibleCount, filters]); // Re-run when new items might be added to DOM
+
   // Handle Scroll for Elegant Navbar
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
     };
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -339,8 +274,11 @@ export default function App() {
     setVisibleCount(6);
   }, [filters]);
 
-  // Action Handlers
-  const scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
+  // Enhanced Smooth Scroll Actions
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   const scrollToSection = (id: string) => {
     setIsMobileMenuOpen(false);
     const element = document.getElementById(id.replace('#', ''));
@@ -369,7 +307,7 @@ export default function App() {
     document.body.style.overflow = 'auto';
   };
 
-  const showToastMsg = (msg: string, bgClass: string = 'bg-green-600') => {
+  const showToastMsg = (msg: string, bgClass: string = 'bg-emerald-600') => {
     setToast({ show: true, message: msg, bgClass });
     setTimeout(() => {
       setToast(prev => ({ ...prev, show: false }));
@@ -399,18 +337,22 @@ export default function App() {
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
         
         body { font-family: 'Plus Jakarta Sans', sans-serif; }
-        html { scroll-behavior: smooth; }
-        ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-track { background: transparent; }
-        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+        html { 
+          /* Removed native smooth scroll here to rely entirely on JS for anchor links to prevent conflict and choppiness */
+          scroll-behavior: auto; 
+        } 
+        
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f5f9; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; border: 2px solid #f1f5f9; }
         ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
-        .custom-scrollbar::-webkit-scrollbar { height: 4px; }
+        .custom-scrollbar::-webkit-scrollbar { height: 6px; }
         
         /* Advanced Glassmorphism */
-        .glass-nav-scrolled { background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid rgba(255,255,255,0.3); box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03); }
-        .glass-nav-top { background: linear-gradient(to bottom, rgba(15, 23, 42, 0.6), transparent); }
+        .glass-nav-scrolled { background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid rgba(255,255,255,0.8); box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03); }
+        .glass-nav-top { background: linear-gradient(to bottom, rgba(15, 23, 42, 0.5), transparent); }
         .glass-panel { background: rgba(255, 255, 255, 0.2); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.3); box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); }
-        .glass-card { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.5); box-shadow: 0 10px 40px -10px rgba(0,0,0,0.05); }
+        .glass-card { background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.8); box-shadow: 0 10px 40px -10px rgba(0,0,0,0.05); }
         
         /* Smooth Diffused Shadows */
         .shadow-soft { box-shadow: 0 20px 40px -15px rgba(0,0,0,0.05); }
@@ -424,11 +366,27 @@ export default function App() {
           background-color: #f97316; transition: width 0.4s cubic-bezier(0.25, 1, 0.5, 1);
           border-radius: 2px;
         }
-        .nav-link:hover::after { width: 100%; }
-        .nav-link.active::after { width: 100%; }
+        .nav-link:hover::after, .nav-link.active::after { width: 100%; }
         
         /* Text Gradients */
         .text-gradient { background: linear-gradient(135deg, #f97316 0%, #ea580c 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        
+        /* Reveal Animations (The core of smooth elegant feeling) */
+        .reveal {
+          opacity: 0;
+          transform: translateY(40px);
+          transition: all 1s cubic-bezier(0.16, 1, 0.3, 1); /* Buttery smooth easing */
+          will-change: opacity, transform;
+        }
+        .reveal.active {
+          opacity: 1;
+          transform: translateY(0);
+        }
+        /* Staggered delays for grids */
+        .delay-100 { transition-delay: 100ms; }
+        .delay-200 { transition-delay: 200ms; }
+        .delay-300 { transition-delay: 300ms; }
+        .delay-400 { transition-delay: 400ms; }
         
         /* Marquee Infinite Scroll Animation */
         @keyframes scroll {
@@ -456,16 +414,16 @@ export default function App() {
       </div>
 
       {/* Aesthetic Navigation */}
-      <nav className={`fixed w-full z-50 transition-all duration-500 ${isScrolled ? 'glass-nav-scrolled py-3' : 'glass-nav-top py-5'}`}>
+      <nav className={`fixed w-full z-50 transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${isScrolled ? 'glass-nav-scrolled py-3' : 'glass-nav-top py-5'}`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-12">
 
             {/* Logo */}
             <div className="flex-shrink-0 flex items-center gap-3 cursor-pointer group" onClick={scrollToTop}>
-              <div className="w-10 h-10 bg-gradient-to-br from-orange-500 to-orange-600 rounded-xl flex items-center justify-center text-white shadow-glow transform group-hover:scale-105 transition-all duration-300">
+              <div className="w-10 h-10 bg-gradient-to-br from-orange-500 to-orange-600 rounded-xl flex items-center justify-center text-white shadow-glow transform group-hover:scale-105 transition-all duration-500 ease-out">
                 <Home className="w-5 h-5" />
               </div>
-              <span className={`font-extrabold text-2xl tracking-tight transition-colors duration-300 ${isScrolled ? 'text-slate-900' : 'text-white'}`}>
+              <span className={`font-extrabold text-2xl tracking-tight transition-colors duration-500 ${isScrolled ? 'text-slate-900' : 'text-white'}`}>
                 Home<span className="text-orange-500">Property</span>
               </span>
             </div>
@@ -484,15 +442,15 @@ export default function App() {
                   </button>
                 );
               })}
-              <div className={`w-px h-5 ${isScrolled ? 'bg-slate-200' : 'bg-white/20'}`}></div>
-              <button onClick={() => setShowContactModal(true)} className={`px-8 py-3 rounded-full font-bold text-sm tracking-wide transition-all duration-300 shadow-lg flex items-center gap-2 transform hover:-translate-y-0.5 ${isScrolled ? 'bg-slate-900 text-white hover:bg-orange-500 hover:shadow-orange-500/30' : 'bg-white text-slate-900 hover:bg-orange-500 hover:text-white'}`}>
+              <div className={`w-px h-5 transition-colors duration-500 ${isScrolled ? 'bg-slate-200' : 'bg-white/20'}`}></div>
+              <button onClick={() => setShowContactModal(true)} className={`px-8 py-3 rounded-full font-bold text-sm tracking-wide transition-all duration-500 ease-out shadow-lg flex items-center gap-2 transform hover:-translate-y-0.5 ${isScrolled ? 'bg-slate-900 text-white hover:bg-orange-500 hover:shadow-orange-500/30' : 'bg-white text-slate-900 hover:bg-orange-500 hover:text-white'}`}>
                 Hubungi Spesialis
               </button>
             </div>
 
             {/* Mobile menu button */}
             <div className="lg:hidden flex items-center">
-              <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className={`focus:outline-none transition-colors p-2 rounded-xl backdrop-blur-md ${isScrolled ? 'text-slate-800 bg-slate-100/50' : 'text-white bg-white/10'}`}>
+              <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className={`focus:outline-none transition-all duration-300 p-2 rounded-xl backdrop-blur-md ${isScrolled ? 'text-slate-800 bg-slate-100/50' : 'text-white bg-white/10'}`}>
                 {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
               </button>
             </div>
@@ -500,31 +458,29 @@ export default function App() {
         </div>
 
         {/* Mobile Menu Dropdown */}
-        {isMobileMenuOpen && (
-          <div className="lg:hidden absolute top-full left-0 w-full px-4 pt-2 pb-4">
-            <div className="glass-card rounded-3xl p-4 shadow-2xl border border-white/50 origin-top animate-fade-in-down">
-              <div className="space-y-2">
-                {NAV_LINKS.map((link) => {
-                  const isActive = activeSection === link.href.substring(1);
-                  return (
-                    <button
-                      key={link.label}
-                      onClick={() => scrollToSection(link.href)}
-                      className={`block w-full text-left px-5 py-3.5 text-sm font-semibold rounded-2xl transition-all ${isActive ? 'text-orange-600 bg-orange-50/80' : 'text-slate-600 hover:text-orange-600 hover:bg-slate-50'}`}
-                    >
-                      {link.label}
-                    </button>
-                  );
-                })}
-                <div className="pt-3 pb-1">
-                  <button onClick={() => { setIsMobileMenuOpen(false); setShowContactModal(true); }} className="w-full px-5 py-4 text-sm font-bold text-white bg-gradient-to-r from-orange-500 to-orange-600 hover:to-orange-500 rounded-2xl transition-all shadow-glow">
-                    Hubungi Agen Sekarang
+        <div className={`lg:hidden absolute top-full left-0 w-full px-4 pt-2 pb-4 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] transform origin-top ${isMobileMenuOpen ? 'opacity-100 scale-y-100 visible' : 'opacity-0 scale-y-95 invisible'}`}>
+          <div className="glass-card rounded-3xl p-4 shadow-2xl border border-white/80">
+            <div className="space-y-2">
+              {NAV_LINKS.map((link) => {
+                const isActive = activeSection === link.href.substring(1);
+                return (
+                  <button
+                    key={link.label}
+                    onClick={() => scrollToSection(link.href)}
+                    className={`block w-full text-left px-5 py-3.5 text-sm font-semibold rounded-2xl transition-all ${isActive ? 'text-orange-600 bg-orange-50/80' : 'text-slate-600 hover:text-orange-600 hover:bg-slate-50'}`}
+                  >
+                    {link.label}
                   </button>
-                </div>
+                );
+              })}
+              <div className="pt-3 pb-1">
+                <button onClick={() => { setIsMobileMenuOpen(false); setShowContactModal(true); }} className="w-full px-5 py-4 text-sm font-bold text-white bg-gradient-to-r from-orange-500 to-orange-600 hover:to-orange-500 rounded-2xl transition-all shadow-glow">
+                  Hubungi Agen Sekarang
+                </button>
               </div>
             </div>
           </div>
-        )}
+        </div>
       </nav>
 
       {/* Hero Section */}
@@ -532,7 +488,7 @@ export default function App() {
         {/* Cinematic Image Slider */}
         {HERO_SLIDES.map((slide, index) => (
           <div key={index}
-            className={`absolute inset-0 transition-all duration-[2000ms] ease-out ${currentSlideIndex === index ? 'opacity-100 scale-100' : 'opacity-0 scale-110'}`}
+            className={`absolute inset-0 transition-all duration-[2000ms] ease-out ${currentSlideIndex === index ? 'opacity-100 scale-100' : 'opacity-0 scale-105'}`}
             style={{ backgroundImage: `url('${slide}')`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
             <div className="absolute inset-0 bg-gradient-to-b from-slate-900/60 via-slate-900/40 to-slate-900/80"></div>
           </div>
@@ -540,20 +496,20 @@ export default function App() {
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-10 pt-10">
           <div className="text-center max-w-4xl mx-auto">
-            <div className="inline-flex items-center gap-2 py-2 px-5 rounded-full glass-panel text-white font-medium tracking-widest text-xs mb-8 uppercase shadow-glow">
+            <div className="inline-flex items-center gap-2 py-2 px-5 rounded-full glass-panel text-white font-medium tracking-widest text-xs mb-8 uppercase shadow-glow reveal">
               <span className="w-2 h-2 rounded-full bg-orange-500 animate-pulse"></span>
               Koleksi Hunian Premium 2026
             </div>
-            <h1 className="text-5xl md:text-7xl lg:text-[5.5rem] font-extrabold text-white mb-8 leading-[1.1] tracking-tight drop-shadow-xl">
+            <h1 className="text-5xl md:text-7xl lg:text-[5.5rem] font-extrabold text-white mb-8 leading-[1.1] tracking-tight drop-shadow-xl reveal delay-100">
               Titik Awal <br /><span className="font-light italic text-transparent bg-clip-text bg-gradient-to-r from-orange-300 to-orange-500">Cerita Terindah Anda</span>
             </h1>
-            <p className="text-lg md:text-xl text-slate-200 mb-14 font-light max-w-2xl mx-auto leading-relaxed drop-shadow-md">
+            <p className="text-lg md:text-xl text-slate-200 mb-14 font-light max-w-2xl mx-auto leading-relaxed drop-shadow-md reveal delay-200">
               Lebih dari sekadar susunan bata dan semen. Kami menghadirkan ruang di mana harmoni, estetika, dan kehangatan keluarga menyatu sempurna.
             </p>
 
             {/* Premium Glass Search Box */}
-            <div className="glass-panel p-2.5 rounded-[2rem] flex flex-col md:flex-row gap-2 max-w-4xl mx-auto transform hover:scale-[1.01] transition-transform duration-300">
-              <div className="flex-1 flex items-center bg-white/90 backdrop-blur-sm rounded-[1.5rem] px-6 py-4 transition-all focus-within:ring-2 focus-within:ring-orange-500/50 group">
+            <div className="glass-panel p-2.5 rounded-[2rem] flex flex-col md:flex-row gap-2 max-w-4xl mx-auto transform hover:scale-[1.01] transition-transform duration-500 reveal delay-300">
+              <div className="flex-1 flex items-center bg-white/95 backdrop-blur-md rounded-[1.5rem] px-6 py-4 transition-all focus-within:ring-2 focus-within:ring-orange-500/50 group shadow-sm">
                 <MapPin className="text-slate-400 group-focus-within:text-orange-500 transition-colors w-5 h-5 mr-3" />
                 <select value={filters.location} onChange={(e) => setFilters({ ...filters, location: e.target.value })} className="w-full bg-transparent border-none outline-none text-slate-700 font-semibold cursor-pointer text-sm">
                   <option value="">Semua Lokasi</option>
@@ -564,7 +520,7 @@ export default function App() {
                   <option value="Surabaya">Surabaya</option>
                 </select>
               </div>
-              <div className="flex-1 flex items-center bg-white/90 backdrop-blur-sm rounded-[1.5rem] px-6 py-4 transition-all focus-within:ring-2 focus-within:ring-orange-500/50 group">
+              <div className="flex-1 flex items-center bg-white/95 backdrop-blur-md rounded-[1.5rem] px-6 py-4 transition-all focus-within:ring-2 focus-within:ring-orange-500/50 group shadow-sm">
                 <Home className="text-slate-400 group-focus-within:text-orange-500 transition-colors w-5 h-5 mr-3" />
                 <select value={filters.type} onChange={(e) => setFilters({ ...filters, type: e.target.value })} className="w-full bg-transparent border-none outline-none text-slate-700 font-semibold cursor-pointer text-sm">
                   <option value="">Semua Tipe</option>
@@ -574,7 +530,7 @@ export default function App() {
                   <option value="Villa">Villa</option>
                 </select>
               </div>
-              <button onClick={() => scrollToSection('#properti')} className="bg-gradient-to-r from-orange-500 to-orange-600 hover:to-orange-500 text-white px-10 py-4 rounded-[1.5rem] font-bold text-sm transition-all flex items-center justify-center gap-2 shadow-glow">
+              <button onClick={() => scrollToSection('#properti')} className="bg-gradient-to-r from-orange-500 to-orange-600 hover:to-orange-500 text-white px-10 py-4 rounded-[1.5rem] font-bold text-sm transition-all duration-300 flex items-center justify-center gap-2 shadow-glow hover:shadow-orange-500/40 active:scale-95">
                 <Search className="w-4 h-4" />
                 Temukan
               </button>
@@ -583,10 +539,10 @@ export default function App() {
         </div>
 
         {/* Elegant Slide Indicators */}
-        <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex gap-2.5 z-10">
+        <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex gap-2.5 z-10 reveal delay-400">
           {HERO_SLIDES.map((_, index) => (
             <button key={index} onClick={() => setCurrentSlideIndex(index)}
-              className={`h-1.5 rounded-full transition-all duration-500 ${currentSlideIndex === index ? 'bg-orange-500 w-8' : 'bg-white/40 hover:bg-white/70 w-2'}`}>
+              className={`h-1.5 rounded-full transition-all duration-500 ease-out ${currentSlideIndex === index ? 'bg-orange-500 w-10' : 'bg-white/40 hover:bg-white/70 w-3'}`}>
             </button>
           ))}
         </div>
@@ -595,11 +551,11 @@ export default function App() {
       {/* Properties Section */}
       <section id="properti" className="py-32 relative">
         {/* Background Blur Orbs */}
-        <div className="absolute top-40 left-0 w-96 h-96 bg-orange-200/40 rounded-full mix-blend-multiply filter blur-[100px] opacity-70 animate-float pointer-events-none"></div>
-        <div className="absolute bottom-40 right-0 w-[30rem] h-[30rem] bg-amber-100/40 rounded-full mix-blend-multiply filter blur-[100px] opacity-70 animate-float-delayed pointer-events-none"></div>
+        <div className="absolute top-40 left-0 w-96 h-96 bg-orange-200/30 rounded-full mix-blend-multiply filter blur-[100px] opacity-70 animate-float pointer-events-none"></div>
+        <div className="absolute bottom-40 right-0 w-[30rem] h-[30rem] bg-amber-100/30 rounded-full mix-blend-multiply filter blur-[100px] opacity-70 animate-float-delayed pointer-events-none"></div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
+          <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6 reveal">
             <div className="max-w-2xl">
               <span className="text-orange-500 font-bold tracking-widest uppercase text-xs mb-3 block">Koleksi Eksklusif</span>
               <h2 className="text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tight leading-tight">Kurasi Properti <br /><span className="text-slate-400 font-light">Terbaik Kami</span></h2>
@@ -610,9 +566,10 @@ export default function App() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
-            {displayedProperties.map(prop => (
+            {displayedProperties.map((prop, idx) => (
               <div key={prop.id} onClick={() => openModal(prop)}
-                className="group bg-white/60 backdrop-blur-xl rounded-[2rem] overflow-hidden shadow-soft hover:shadow-2xl hover:shadow-orange-500/5 border border-white/80 transition-all duration-500 cursor-pointer flex flex-col transform hover:-translate-y-2">
+                // Menambahkan reveal class dengan delay dinamis berdasarkan index agar tampil berurutan
+                className={`reveal delay-${(idx % 3) * 100} group bg-white/70 backdrop-blur-xl rounded-[2rem] overflow-hidden shadow-soft hover:shadow-2xl hover:shadow-orange-500/10 border border-white transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] cursor-pointer flex flex-col transform hover:-translate-y-3`}>
 
                 <div className="relative overflow-hidden h-72 p-2">
                   <div className="w-full h-full relative rounded-[1.5rem] overflow-hidden">
@@ -623,7 +580,7 @@ export default function App() {
                     <img src={prop.image} alt={prop.title} className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-out" />
 
                     <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
-                      <div className="w-full flex justify-between items-center transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                      <div className="w-full flex justify-between items-center transform translate-y-4 group-hover:translate-y-0 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]">
                         <span className="text-white font-medium text-sm">Lihat Detail</span>
                         <div className="w-10 h-10 rounded-full bg-orange-500 flex items-center justify-center text-white">
                           <ArrowRight className="w-5 h-5" />
@@ -633,23 +590,23 @@ export default function App() {
                   </div>
                 </div>
 
-                <div className="px-8 pb-8 pt-4 flex-1 flex flex-col">
+                <div className="px-8 pb-8 pt-4 flex-1 flex flex-col bg-gradient-to-b from-transparent to-white/50">
                   <div className="flex items-center text-slate-400 text-xs font-bold uppercase tracking-wider mb-3 gap-1.5">
                     <MapPin className="w-3.5 h-3.5 text-orange-500" />
                     {prop.location}
                   </div>
-                  <h3 className="text-2xl font-bold text-slate-900 mb-2 group-hover:text-orange-500 transition-colors leading-tight">{prop.title}</h3>
+                  <h3 className="text-2xl font-bold text-slate-900 mb-2 group-hover:text-orange-500 transition-colors duration-300 leading-tight">{prop.title}</h3>
                   <p className="text-2xl font-extrabold text-gradient mb-8 mt-auto">{prop.price}</p>
 
-                  <div className="flex items-center justify-between pt-5 border-t border-slate-100 text-slate-500 text-sm font-medium">
+                  <div className="flex items-center justify-between pt-5 border-t border-slate-200/60 text-slate-500 text-sm font-medium">
                     <div className="flex items-center gap-2" title="Kamar Tidur">
-                      <BedDouble className="w-4 h-4 text-slate-300" /> {prop.beds}
+                      <BedDouble className="w-4 h-4 text-slate-400" /> {prop.beds}
                     </div>
                     <div className="flex items-center gap-2" title="Kamar Mandi">
-                      <Bath className="w-4 h-4 text-slate-300" /> {prop.baths}
+                      <Bath className="w-4 h-4 text-slate-400" /> {prop.baths}
                     </div>
                     <div className="flex items-center gap-2" title="Luas (m²)">
-                      <Maximize className="w-4 h-4 text-slate-300" /> {prop.area} m²
+                      <Maximize className="w-4 h-4 text-slate-400" /> {prop.area} m²
                     </div>
                   </div>
                 </div>
@@ -658,10 +615,10 @@ export default function App() {
           </div>
 
           {visibleCount < filteredProperties.length && (
-            <div className="mt-16 flex justify-center">
+            <div className="mt-16 flex justify-center reveal delay-200">
               <button
                 onClick={() => setVisibleCount(prev => prev + 3)}
-                className="glass-card px-8 py-4 rounded-full font-bold text-orange-600 tracking-wide transition-all duration-300 flex items-center justify-center gap-3 shadow-soft hover:shadow-glow hover:-translate-y-1 group border border-orange-200/50 hover:bg-white"
+                className="glass-card px-8 py-4 rounded-full font-bold text-orange-600 tracking-wide transition-all duration-300 flex items-center justify-center gap-3 shadow-soft hover:shadow-glow hover:-translate-y-1 group border border-orange-200/50 hover:bg-white active:scale-95"
               >
                 Muat Lebih Banyak
                 <ChevronDown className="w-5 h-5 group-hover:translate-y-1 transition-transform duration-300" />
@@ -670,7 +627,7 @@ export default function App() {
           )}
 
           {filteredProperties.length === 0 && (
-            <div className="text-center py-24 bg-white/50 backdrop-blur-sm rounded-[3rem] border border-white shadow-soft mt-8">
+            <div className="text-center py-24 bg-white/50 backdrop-blur-sm rounded-[3rem] border border-white shadow-soft mt-8 reveal">
               <div className="w-24 h-24 bg-slate-50 rounded-full flex items-center justify-center mx-auto mb-6">
                 <Search className="w-10 h-10 text-slate-300" />
               </div>
@@ -687,7 +644,7 @@ export default function App() {
       {/* Layanan Kami - Aesthetic Cards */}
       <section id="layanan" className="py-32 bg-white relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-20">
+          <div className="text-center mb-20 reveal">
             <span className="text-orange-500 font-bold tracking-widest uppercase text-xs mb-3 block">Layanan Komprehensif</span>
             <h2 className="text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tight">Lebih Dari Sekadar <br /><span className="text-slate-400 font-light">Menjual Rumah</span></h2>
           </div>
@@ -698,16 +655,16 @@ export default function App() {
               { icon: Key, title: "Jaminan Legalitas", desc: "Ketenangan pikiran Anda adalah prioritas. Seluruh properti bersertifikat SHM dan terverifikasi bebas dari segala sengketa hukum.", img: "https://images.unsplash.com/photo-1589829085413-56de8ae18c73?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" },
               { icon: Headset, title: "Purna Jual Premium", desc: "Dedikasi kami tidak berakhir saat serah terima. Nikmati garansi bangunan dan layanan pendampingan ekstensif pasca pembelian.", img: "https://images.unsplash.com/photo-1560520653-9e0e4c89eb11?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" }
             ].map((srv, idx) => (
-              <div key={idx} className="group rounded-[2.5rem] overflow-hidden bg-slate-50 relative flex flex-col justify-end min-h-[400px]">
-                <img src={srv.img} alt={srv.title} className="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-700 ease-out grayscale-[30%] group-hover:grayscale-0" />
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/60 to-transparent"></div>
+              <div key={idx} className={`reveal delay-${idx * 100} group rounded-[2.5rem] overflow-hidden bg-slate-50 relative flex flex-col justify-end min-h-[400px]`}>
+                <img src={srv.img} alt={srv.title} className="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:scale-110 transition-transform duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] grayscale-[30%] group-hover:grayscale-0" />
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-900/60 to-transparent"></div>
 
-                <div className="relative z-10 p-10 flex flex-col h-full justify-end transform transition-transform duration-500">
-                  <div className="w-14 h-14 glass-panel rounded-2xl flex items-center justify-center text-white mb-6 shadow-glow transform group-hover:-translate-y-2 transition-transform duration-500">
+                <div className="relative z-10 p-10 flex flex-col h-full justify-end transform transition-transform duration-500 ease-out">
+                  <div className="w-14 h-14 glass-panel rounded-2xl flex items-center justify-center text-white mb-6 shadow-glow transform group-hover:-translate-y-2 transition-transform duration-500 ease-out">
                     <srv.icon className="w-6 h-6" />
                   </div>
                   <h3 className="text-2xl font-bold text-white mb-3">{srv.title}</h3>
-                  <p className="text-slate-300 font-light leading-relaxed text-sm opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-500 h-0 group-hover:h-auto">
+                  <p className="text-slate-300 font-light leading-relaxed text-sm opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] h-0 group-hover:h-auto">
                     {srv.desc}
                   </p>
                 </div>
@@ -719,20 +676,20 @@ export default function App() {
 
       {/* Tentang Kami - Magazine Layout */}
       <section id="keunggulan" className="py-32 bg-[#f8fafc] relative overflow-hidden">
-        <div className="absolute top-0 right-0 -mr-20 -mt-20 w-96 h-96 rounded-full bg-orange-200/30 blur-[120px]"></div>
-        <div className="absolute bottom-0 left-0 -ml-20 -mb-20 w-80 h-80 rounded-full bg-blue-200/30 blur-[100px]"></div>
+        <div className="absolute top-0 right-0 -mr-20 -mt-20 w-96 h-96 rounded-full bg-orange-200/20 blur-[120px]"></div>
+        <div className="absolute bottom-0 left-0 -ml-20 -mb-20 w-80 h-80 rounded-full bg-blue-200/20 blur-[100px]"></div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="flex flex-col lg:flex-row items-center gap-20">
 
             <div className="lg:w-1/2 flex gap-5">
-              <div className="w-1/2 flex flex-col gap-5 mt-16">
-                <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Rumah Nyaman" className="rounded-[2.5rem] shadow-soft object-cover h-72 w-full transform hover:-translate-y-2 transition duration-700" />
-                <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Interior Hangat" className="rounded-[2.5rem] shadow-soft object-cover h-56 w-full transform hover:-translate-y-2 transition duration-700" />
+              <div className="w-1/2 flex flex-col gap-5 mt-16 reveal">
+                <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Rumah Nyaman" className="rounded-[2.5rem] shadow-soft object-cover h-72 w-full transform hover:-translate-y-2 transition duration-700 ease-out" />
+                <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Interior Hangat" className="rounded-[2.5rem] shadow-soft object-cover h-56 w-full transform hover:-translate-y-2 transition duration-700 ease-out delay-100" />
               </div>
-              <div className="w-1/2 flex flex-col gap-5">
-                <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Keluarga Bahagia" className="rounded-[2.5rem] shadow-soft object-cover h-[22rem] w-full transform hover:-translate-y-2 transition duration-700" />
-                <div className="bg-gradient-to-br from-orange-500 to-orange-600 rounded-[2.5rem] p-8 text-white shadow-glow transform hover:-translate-y-2 transition duration-700 flex flex-col justify-center items-center text-center h-48 relative overflow-hidden">
+              <div className="w-1/2 flex flex-col gap-5 reveal delay-200">
+                <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Keluarga Bahagia" className="rounded-[2.5rem] shadow-soft object-cover h-[22rem] w-full transform hover:-translate-y-2 transition duration-700 ease-out" />
+                <div className="bg-gradient-to-br from-orange-500 to-orange-600 rounded-[2.5rem] p-8 text-white shadow-glow transform hover:-translate-y-2 transition duration-700 ease-out flex flex-col justify-center items-center text-center h-48 relative overflow-hidden">
                   <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full blur-2xl transform translate-x-10 -translate-y-10"></div>
                   <h4 className="text-5xl font-extrabold mb-2 tracking-tighter">10<span className="text-orange-200">+</span></h4>
                   <p className="text-xs font-semibold uppercase tracking-widest opacity-90 leading-relaxed">Tahun Kepercayaan</p>
@@ -741,13 +698,15 @@ export default function App() {
             </div>
 
             <div className="lg:w-1/2">
-              <span className="text-orange-500 font-bold tracking-widest uppercase text-xs mb-3 block">Filosofi Kami</span>
-              <h2 className="text-4xl md:text-5xl font-extrabold text-slate-900 mb-8 tracking-tight leading-tight">Membangun Cerita, <br /><span className="text-slate-400 font-light">Bukan Sekadar Fisik.</span></h2>
-              <p className="text-slate-500 mb-12 text-lg font-light leading-relaxed">Di Home Property, kami memahami bahwa rumah adalah tempat lahirnya kenangan terindah. Kami mendedikasikan diri untuk merancang ruang yang tidak hanya memanjakan mata, tapi juga merengkuh hangatnya keluarga Anda setiap hari.</p>
+              <div className="reveal">
+                <span className="text-orange-500 font-bold tracking-widest uppercase text-xs mb-3 block">Filosofi Kami</span>
+                <h2 className="text-4xl md:text-5xl font-extrabold text-slate-900 mb-8 tracking-tight leading-tight">Membangun Cerita, <br /><span className="text-slate-400 font-light">Bukan Sekadar Fisik.</span></h2>
+                <p className="text-slate-500 mb-12 text-lg font-light leading-relaxed">Di Home Property, kami memahami bahwa rumah adalah tempat lahirnya kenangan terindah. Kami mendedikasikan diri untuk merancang ruang yang tidak hanya memanjakan mata, tapi juga merengkuh hangatnya keluarga Anda setiap hari.</p>
+              </div>
 
               <div className="flex flex-col gap-6">
-                <div className="group glass-card p-6 rounded-3xl border border-white hover:border-orange-200 transition-all duration-300 flex gap-5 items-start">
-                  <div className="w-14 h-14 rounded-2xl bg-slate-50 flex items-center justify-center text-slate-400 group-hover:text-orange-500 group-hover:bg-orange-50 transition-colors flex-shrink-0">
+                <div className="reveal delay-100 group glass-card p-6 rounded-3xl border border-white hover:border-orange-200 transition-all duration-500 ease-out flex gap-5 items-start shadow-sm hover:shadow-md">
+                  <div className="w-14 h-14 rounded-2xl bg-slate-50 flex items-center justify-center text-slate-400 group-hover:text-orange-500 group-hover:bg-orange-50 transition-colors duration-300 flex-shrink-0">
                     <ShieldCheck className="w-6 h-6" />
                   </div>
                   <div>
@@ -755,8 +714,8 @@ export default function App() {
                     <p className="text-sm text-slate-500 font-light leading-relaxed">Kejujuran dalam spesifikasi material dan transparansi biaya tanpa *hidden fee*.</p>
                   </div>
                 </div>
-                <div className="group glass-card p-6 rounded-3xl border border-white hover:border-orange-200 transition-all duration-300 flex gap-5 items-start">
-                  <div className="w-14 h-14 rounded-2xl bg-slate-50 flex items-center justify-center text-slate-400 group-hover:text-orange-500 group-hover:bg-orange-50 transition-colors flex-shrink-0">
+                <div className="reveal delay-200 group glass-card p-6 rounded-3xl border border-white hover:border-orange-200 transition-all duration-500 ease-out flex gap-5 items-start shadow-sm hover:shadow-md">
+                  <div className="w-14 h-14 rounded-2xl bg-slate-50 flex items-center justify-center text-slate-400 group-hover:text-orange-500 group-hover:bg-orange-50 transition-colors duration-300 flex-shrink-0">
                     <Gem className="w-6 h-6" />
                   </div>
                   <div>
@@ -774,13 +733,13 @@ export default function App() {
       {/* Testimonials - Elegant Marquee */}
       <section id="testimoni" className="py-32 bg-white overflow-hidden border-t border-slate-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
-          <div className="text-center">
+          <div className="text-center reveal">
             <span className="text-orange-500 font-bold tracking-widest uppercase text-xs mb-3 block">Kisah Nyata</span>
             <h2 className="text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tight">Suara Penghuni Kami</h2>
           </div>
         </div>
 
-        <div className="relative w-full max-w-[100vw] py-10">
+        <div className="relative w-full max-w-[100vw] py-10 reveal delay-200">
           <div className="absolute top-0 left-0 w-24 md:w-64 h-full bg-gradient-to-r from-white to-transparent z-10 pointer-events-none"></div>
           <div className="absolute top-0 right-0 w-24 md:w-64 h-full bg-gradient-to-l from-white to-transparent z-10 pointer-events-none"></div>
 
@@ -788,8 +747,8 @@ export default function App() {
             {/* Set 1 */}
             <div className="flex gap-8 px-4">
               {TESTIMONIALS.map((t, idx) => (
-                <div key={`set1-${idx}`} className="w-[360px] md:w-[480px] flex-shrink-0 bg-white p-10 rounded-[2.5rem] border border-slate-100 shadow-soft hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 relative whitespace-normal group">
-                  <Quote className="absolute top-10 right-10 w-16 h-16 text-slate-50 opacity-50 group-hover:text-orange-50 transition-colors" />
+                <div key={`set1-${idx}`} className="w-[360px] md:w-[480px] flex-shrink-0 bg-white p-10 rounded-[2.5rem] border border-slate-100 shadow-soft hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] relative whitespace-normal group">
+                  <Quote className="absolute top-10 right-10 w-16 h-16 text-slate-50 opacity-50 group-hover:text-orange-50 transition-colors duration-500" />
                   <div className="flex gap-1 mb-8 relative z-10">
                     {[...Array(5)].map((_, i) => <Star key={i} className="w-5 h-5 fill-orange-400 text-orange-400" />)}
                   </div>
@@ -807,8 +766,8 @@ export default function App() {
             {/* Set 2 (Duplikasi Seamless) */}
             <div className="flex gap-8 px-4">
               {TESTIMONIALS.map((t, idx) => (
-                <div key={`set2-${idx}`} className="w-[360px] md:w-[480px] flex-shrink-0 bg-white p-10 rounded-[2.5rem] border border-slate-100 shadow-soft hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 relative whitespace-normal group">
-                  <Quote className="absolute top-10 right-10 w-16 h-16 text-slate-50 opacity-50 group-hover:text-orange-50 transition-colors" />
+                <div key={`set2-${idx}`} className="w-[360px] md:w-[480px] flex-shrink-0 bg-white p-10 rounded-[2.5rem] border border-slate-100 shadow-soft hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] relative whitespace-normal group">
+                  <Quote className="absolute top-10 right-10 w-16 h-16 text-slate-50 opacity-50 group-hover:text-orange-50 transition-colors duration-500" />
                   <div className="flex gap-1 mb-8 relative z-10">
                     {[...Array(5)].map((_, i) => <Star key={i} className="w-5 h-5 fill-orange-400 text-orange-400" />)}
                   </div>
@@ -830,12 +789,12 @@ export default function App() {
       {/* FAQ Section - Clean Accordion */}
       <section id="faq" className="py-32 bg-[#f8fafc]">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
+          <div className="text-center mb-16 reveal">
             <h2 className="text-4xl md:text-5xl font-extrabold text-slate-900 mb-6 tracking-tight">Pertanyaan Umum</h2>
             <p className="text-slate-500 text-lg font-light">Segala informasi transparan yang perlu Anda ketahui sebelum melangkah lebih jauh bersama kami.</p>
           </div>
 
-          <div className="glass-card p-6 md:p-10 rounded-[2.5rem]">
+          <div className="glass-card p-6 md:p-10 rounded-[2.5rem] reveal delay-200">
             {FAQS.map((faq, index) => (
               <FaqAccordionItem
                 key={index}
@@ -854,10 +813,10 @@ export default function App() {
         <div className="absolute top-0 right-0 w-[40rem] h-[40rem] bg-orange-500/5 rounded-full blur-[100px] pointer-events-none"></div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-16 lg:gap-12">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-16 lg:gap-12 reveal">
             <div className="md:col-span-12 lg:col-span-5">
               <div className="flex items-center gap-3 mb-8 cursor-pointer group" onClick={scrollToTop}>
-                <div className="w-12 h-12 bg-gradient-to-br from-orange-500 to-orange-600 rounded-xl flex items-center justify-center text-white shadow-glow group-hover:scale-105 transition-transform">
+                <div className="w-12 h-12 bg-gradient-to-br from-orange-500 to-orange-600 rounded-xl flex items-center justify-center text-white shadow-glow group-hover:scale-105 transition-transform duration-300 ease-out">
                   <Home className="w-6 h-6" />
                 </div>
                 <span className="font-extrabold text-3xl tracking-tight text-white">Home<span className="text-orange-500">Property</span></span>
@@ -865,14 +824,14 @@ export default function App() {
               <p className="text-slate-400 mb-10 font-light leading-relaxed max-w-md text-lg">Mewujudkan hunian impian dengan sentuhan personal, dedikasi tinggi, dan estetika yang tak lekang oleh waktu.</p>
               <div className="flex space-x-5">
                 {[Facebook, Instagram, Twitter].map((Icon, idx) => (
-                  <a key={idx} href="#" className="w-12 h-12 rounded-full bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:bg-orange-500 hover:text-white hover:border-orange-500 transition-all duration-300 hover:-translate-y-1">
+                  <a key={idx} href="#" className="w-12 h-12 rounded-full bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:bg-orange-500 hover:text-white hover:border-orange-500 transition-all duration-300 hover:-translate-y-1 shadow-soft">
                     <Icon className="w-5 h-5" />
                   </a>
                 ))}
               </div>
             </div>
 
-            <div className="md:col-span-6 lg:col-span-3 lg:pl-12">
+            <div className="md:col-span-6 lg:col-span-3 lg:pl-12 reveal delay-100">
               <h4 className="text-lg font-bold mb-8 text-white tracking-wide">Pencarian Cepat</h4>
               <ul className="space-y-4">
                 {['Properti Bandar Lampung', 'Apartemen Jakarta', 'Villa Eksklusif Bali', 'Info Rumah Subsidi'].map((item, idx) => (
@@ -887,7 +846,7 @@ export default function App() {
               </ul>
             </div>
 
-            <div className="md:col-span-6 lg:col-span-4">
+            <div className="md:col-span-6 lg:col-span-4 reveal delay-200">
               <h4 className="text-lg font-bold mb-8 text-white tracking-wide">Hubungi Kami</h4>
               <ul className="space-y-6">
                 <li className="flex items-start gap-5">
@@ -911,7 +870,7 @@ export default function App() {
               </ul>
             </div>
           </div>
-          <div className="border-t border-slate-800/50 mt-20 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-slate-500 font-light text-sm">
+          <div className="border-t border-slate-800/50 mt-20 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-slate-500 font-light text-sm reveal delay-300">
             <p>&copy; 2026 Home Property. All rights reserved.</p>
             <p>Dirancang dengan hati untuk keluarga Anda.</p>
           </div>
@@ -921,10 +880,10 @@ export default function App() {
       {/* Premium Property Detail Modal */}
       {selectedProperty && (
         <div className="fixed inset-0 z-50 flex items-center justify-center px-4 pt-4 pb-20 text-center sm:p-0">
-          <div className="absolute inset-0 bg-slate-900/80 backdrop-blur-md transition-opacity" onClick={closeModal}></div>
+          <div className="absolute inset-0 bg-slate-900/80 backdrop-blur-md transition-opacity duration-500" onClick={closeModal}></div>
 
-          <div className="relative bg-white rounded-[2.5rem] text-left overflow-hidden shadow-2xl transform transition-all sm:my-8 sm:max-w-5xl w-full flex flex-col md:flex-row h-[90vh] md:h-auto max-h-[90vh] overflow-y-auto z-10 animate-fade-in-up border border-white/20">
-            <button onClick={closeModal} className="absolute top-6 right-6 z-20 w-12 h-12 glass-panel rounded-full flex items-center justify-center text-slate-800 hover:bg-white hover:text-red-500 transition-all shadow-lg hover:scale-110">
+          <div className="relative bg-white rounded-[2.5rem] text-left overflow-hidden shadow-2xl transform transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] sm:my-8 sm:max-w-5xl w-full flex flex-col md:flex-row h-[90vh] md:h-auto max-h-[90vh] overflow-y-auto z-10 animate-fade-in-up border border-white/20 scale-100 opacity-100">
+            <button onClick={closeModal} className="absolute top-6 right-6 z-20 w-12 h-12 glass-panel rounded-full flex items-center justify-center text-slate-800 hover:bg-white hover:text-red-500 transition-all duration-300 shadow-lg hover:scale-110 active:scale-95">
               <X className="w-6 h-6" />
             </button>
 
@@ -941,7 +900,7 @@ export default function App() {
                 {selectedProperty.images.map((img, idx) => (
                   <div key={idx}
                     onClick={() => setModalImageIndex(idx)}
-                    className={`relative flex-shrink-0 w-24 h-24 rounded-2xl overflow-hidden cursor-pointer transition-all duration-300 border-2 ${modalImageIndex === idx ? 'border-orange-500 shadow-md scale-105 opacity-100' : 'border-transparent opacity-50 hover:opacity-100'}`}>
+                    className={`relative flex-shrink-0 w-24 h-24 rounded-2xl overflow-hidden cursor-pointer transition-all duration-500 ease-out border-2 ${modalImageIndex === idx ? 'border-orange-500 shadow-md scale-105 opacity-100' : 'border-transparent opacity-50 hover:opacity-100'}`}>
                     <img src={img} className="w-full h-full object-cover" />
                   </div>
                 ))}
@@ -997,11 +956,11 @@ export default function App() {
               </div>
 
               <div className="flex gap-4 mt-6">
-                <button onClick={scheduleSurvey} className="flex-1 bg-slate-900 hover:bg-orange-500 text-white py-4 rounded-2xl font-bold tracking-wide transition-all shadow-soft flex justify-center items-center gap-2 hover:-translate-y-1">
+                <button onClick={scheduleSurvey} className="flex-1 bg-slate-900 hover:bg-orange-500 text-white py-4 rounded-2xl font-bold tracking-wide transition-all duration-300 shadow-soft flex justify-center items-center gap-2 hover:-translate-y-1 active:scale-95">
                   <CalendarCheck className="w-5 h-5" />
                   Jadwalkan Survei
                 </button>
-                <button onClick={saveToFavorites} className="w-16 h-16 border-2 border-slate-100 text-slate-400 hover:border-orange-500 hover:text-orange-500 rounded-2xl flex items-center justify-center transition-all bg-white hover:-translate-y-1">
+                <button onClick={saveToFavorites} className="w-16 h-16 border-2 border-slate-100 text-slate-400 hover:border-orange-500 hover:text-orange-500 rounded-2xl flex items-center justify-center transition-all duration-300 bg-white hover:-translate-y-1 active:scale-95 shadow-sm hover:shadow-md">
                   <Heart className="w-6 h-6" />
                 </button>
               </div>
@@ -1013,8 +972,8 @@ export default function App() {
       {/* Premium Contact Modal */}
       {showContactModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center px-4 text-center">
-          <div className="absolute inset-0 bg-slate-900/80 backdrop-blur-md transition-opacity" onClick={() => setShowContactModal(false)}></div>
-          <div className="relative bg-white rounded-[2.5rem] text-left overflow-hidden shadow-2xl transform transition-all max-w-lg w-full p-12 z-10 animate-fade-in-up border border-white/20">
+          <div className="absolute inset-0 bg-slate-900/80 backdrop-blur-md transition-opacity duration-500" onClick={() => setShowContactModal(false)}></div>
+          <div className="relative bg-white rounded-[2.5rem] text-left overflow-hidden shadow-2xl transform transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] max-w-lg w-full p-12 z-10 animate-fade-in-up border border-white/20 scale-100 opacity-100">
             <button onClick={() => setShowContactModal(false)} className="absolute top-6 right-6 w-10 h-10 flex items-center justify-center rounded-full bg-slate-50 text-slate-400 hover:text-slate-900 hover:bg-slate-200 transition-colors">
               <X className="w-5 h-5" />
             </button>
@@ -1039,7 +998,7 @@ export default function App() {
                   <label className="block text-xs font-bold text-slate-400 uppercase tracking-widest mb-2">Pesan & Kebutuhan</label>
                   <textarea rows={3} required className="w-full px-5 py-4 bg-slate-50/50 border border-slate-200 rounded-2xl focus:bg-white focus:ring-2 focus:ring-orange-500/50 focus:border-orange-500 outline-none transition-all font-medium text-slate-800 resize-none"></textarea>
                 </div>
-                <button type="submit" className="w-full bg-gradient-to-r from-orange-500 to-orange-600 hover:to-orange-500 text-white py-4 rounded-2xl font-bold tracking-wide transition-all shadow-glow flex justify-center items-center gap-2 mt-4 transform hover:-translate-y-1">
+                <button type="submit" className="w-full bg-gradient-to-r from-orange-500 to-orange-600 hover:to-orange-500 text-white py-4 rounded-2xl font-bold tracking-wide transition-all duration-300 shadow-glow flex justify-center items-center gap-2 mt-4 transform hover:-translate-y-1 active:scale-95">
                   Kirim Pesan Sekarang
                 </button>
               </div>
