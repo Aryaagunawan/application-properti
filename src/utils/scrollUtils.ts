@@ -5,7 +5,7 @@ export const scrollToTop = () => {
 export const scrollToSection = (id: string) => {
     const element = document.getElementById(id.replace('#', ''));
     if (element) {
-        const offset = 80; // height of navbar
+        const offset = 80;
         const bodyRect = document.body.getBoundingClientRect().top;
         const elementRect = element.getBoundingClientRect().top;
         const elementPosition = elementRect - bodyRect;
