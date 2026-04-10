@@ -1,53 +1,78 @@
-# React + TypeScript + Vite
+# Nirwana Estate - Real Estate Website
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Proyek website properti yang dibangun dengan React, TypeScript, dan Tailwind CSS.
 
-Currently, two official plugins are available:
+## Struktur Folder
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
-
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```
+src/
+├── components/          # Komponen React terpisah
+│   └── FaqAccordionItem.tsx
+├── data/               # Data mock dan konstanta
+│   └── mockData.ts
+├── hooks/              # Custom hooks
+│   ├── useScrollReveal.ts
+│   ├── useScrollNavbar.ts
+│   └── useActiveSection.ts
+├── types/              # TypeScript interfaces
+│   └── index.ts
+├── utils/              # Fungsi utilitas
+│   └── scrollUtils.ts
+├── App.tsx             # Komponen utama
+└── main.tsx           # Entry point
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Fitur
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
+- **Hero Section** dengan slider gambar otomatis
+- **Filter Properti** berdasarkan lokasi dan tipe
+- **Galeri Properti** dengan modal detail
+- **Testimoni** dengan animasi marquee
+- **FAQ Accordion** interaktif
+- **Navigation** yang responsif dengan efek scroll
+- **Animasi Scroll Reveal** untuk pengalaman yang smooth
+
+## Teknologi
+
+- React 18
+- TypeScript
+- Tailwind CSS
+- Lucide React (ikon)
+- Vite (build tool)
+
+## Cara Menjalankan
+
+1. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+2. Jalankan development server:
+   ```bash
+   npm run dev
+   ```
+
+3. Build untuk production:
+   ```bash
+   npm run build
+   ```
+
+## Struktur Kode yang Rapi
+
+Kode telah diorganisir dengan baik untuk kemudahan maintenance:
+
+- **Components**: Komponen UI terpisah untuk reusability
+- **Data**: Data mock terpusat untuk mudah diubah
+- **Hooks**: Logika state dan efek terpisah
+- **Types**: Type definitions untuk type safety
+- **Utils**: Fungsi helper yang bisa digunakan ulang
+
+## Optimisasi
+
+- Lazy loading untuk gambar
+- Intersection Observer untuk animasi scroll
+- Debounced scroll events
+- CSS animations yang performant
 import reactDom from 'eslint-plugin-react-dom'
 
 export default defineConfig([
